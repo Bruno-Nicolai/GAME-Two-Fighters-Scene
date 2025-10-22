@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conflito</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        box-sizing: border-box;
+        font-family: "Raleway", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- container -->
+    <div style="position: relative; display: inline-block">
+      <!-- container interno -->
+      <div
+        style="
+          position: absolute;
+          display: flex;
+          width: 100%;
+          align-items: center;
+          padding: 20px;
+        "
+      >
+        <!-- vida do jogador -->
+        <div
+          style="
+            position: relative;
+            height: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+          "
+        >
+          <div
+            style="background-color: maroon; height: 30px; width: 100%"
+          ></div>
+          <div
+            id="jogadorVida"
+            style="
+              position: absolute;
+              background: red;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              width: 100%;
+            "
+          ></div>
+        </div>
+
+        <!-- temporizador -->
+        <div
+          id="temporizador"
+          style="
+            background-color: azure;
+            font-size: 2em;
+            border-radius: 50%;
+            border: 10px solid #fff;
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        ></div>
+
+        <!-- vida do oponente -->
+        <div style="position: relative; width: 100%">
+          <div style="background-color: darkblue; height: 30px"></div>
+          <div
+            id="oponenteVida"
+            style="
+              position: absolute;
+              background: blue;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+            "
+          ></div>
+        </div>
+      </div>
+      <canvas></canvas>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
