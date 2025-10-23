@@ -1,4 +1,4 @@
-# That's a 2D Game made with Vanilla Js and the Canvas API. 
+# That's a 2D Game made with Vanilla Js + Canvas API. 
 > a fighting game where two players battle it out until there is a winner or the time runs out. The game runs inside a canvas element and the graphics are drawn using the 2D context of the canvas.
 + two fighters, one controlled by the player on the left and the other controlled by the player on the right. 
 + a timer starts at 60 seconds and counts down to zero. If no fighter has won when the timer reaches zero, the game ends in a tie. The player with more health at the end of the game is declared the winner.
