@@ -136,6 +136,19 @@ window.addEventListener("keyup", (event) => {
 
 // =======================================================
 
+let temporizador = 20
+let id_temporizador
+function descrescerTemporizador() {
+  if (temporizador > 0) {
+    id_temporizador = setTimeout(descrescerTemporizador, 1000)
+    temporizador--
+    document.querySelector("#temporizador").innerHTML = temporizador
+  }
+}
+descrescerTemporizador()
+
+// =======================================================
+
 function animate() {
   window.requestAnimationFrame(animate)
   c.fillStyle = "black"
