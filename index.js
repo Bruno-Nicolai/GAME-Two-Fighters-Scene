@@ -186,9 +186,9 @@ window.addEventListener("keyup", (event) => {
 
 let temporizador = 20
 let id_temporizador
-function descrescerTemporizador() {
+function decrescerTemporizador() {
   if (temporizador > 0) {
-    id_temporizador = setTimeout(descrescerTemporizador, 1000)
+    id_temporizador = setTimeout(decrescerTemporizador, 1000)
     temporizador--
     document.querySelector("#temporizador").innerHTML = temporizador
   }
@@ -200,7 +200,7 @@ function descrescerTemporizador() {
     })
   }
 }
-descrescerTemporizador()
+decrescerTemporizador()
 
 // =======================================================
 
