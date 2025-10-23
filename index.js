@@ -144,8 +144,26 @@ function descrescerTemporizador() {
     temporizador--
     document.querySelector("#temporizador").innerHTML = temporizador
   }
+  if (temporizador === 0) {
+    definirVencedor({ 
+      jogador, 
+      oponente, 
+      id_temporizador 
+    });
+  }
 }
 descrescerTemporizador()
+
+// =======================================================
+
+function definirVencedor({ jogador, oponente, id_temporizador }) {
+  clearTimeout(id_temporizador);
+  document.querySelector("#mostrarTexto").style.display = "flex";
+
+  if (jogador.vida === oponente.vida) {
+    document.querySelector("#mostrarTexto").innerHTML = "Empate";
+  }
+}
 
 // =======================================================
 
