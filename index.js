@@ -209,7 +209,11 @@ function definirVencedor({ jogador, oponente, id_temporizador }) {
   document.querySelector("#mostrarTexto").style.display = "flex"
 
   if (jogador.vida === oponente.vida) {
-    document.querySelector("#mostrarTexto").innerHTML = "Empate"
+    document.querySelector("#mostrarTexto").innerHTML = "Empate";
+  } else if (jogador.vida > oponente.vida) {
+    document.querySelector("#mostrarTexto").innerHTML = "Jogador 1 venceu";
+  } else if (jogador.vida < oponente.vida) {
+    document.querySelector("#mostrarTexto").innerHTML = "Jogador 2 venceu";
   }
 }
 
@@ -258,7 +262,7 @@ function animate() {
     oponente.velocidade.x = 7;
   }
 
-  // detecção de colisão
+  // detecção de colisões
   if (
     acertarSoco({
       retangulo1: jogador,
@@ -281,6 +285,11 @@ function animate() {
     oponente.estaAtacando = false;
     jogador.vida -= 20;
     document.querySelector("#jogadorVida").style.width = jogador.vida + "%";
+  }
+
+  // encerra game por derrota
+  if (oponente.vida <= 0 || jogador.vida <= 0) {
+    definirVencedor({ jogador, oponente, id_temporizador });
   }
 }
 animate()
