@@ -12,12 +12,22 @@ c.fillRect(0, 0, canvas.width, canvas.height)
 
 class Combatente {
 
-  constructor({ posicao, velocidade, cor }) {
+  constructor({ posicao, velocidade, cor, areaDeslocamentoBraco }) {
     this.posicao = posicao
     this.velocidade = velocidade
     this.largura = 60
     this.altura = 300
     this.ultimaTecla
+    this.espacoAtaque = {
+      posicao: {
+        x: this.posicao.x,
+        y: this.posicao.y,
+      },
+      areaDeslocamentoBraco,
+      largura: 120,
+      altura: 75,
+    }
+    this.estaAtacando
     this.cor = cor
     this.vida = 100
   }
@@ -25,10 +35,25 @@ class Combatente {
   renderizar() {
     c.fillStyle = this.cor
     c.fillRect(this.posicao.x, this.posicao.y, this.largura, this.altura)
+
+    if (this.estaAtacando) {
+      c.fillStyle = "green"
+      c.fillRect(
+        // area do soco
+        this.espacoAtaque.posicao.x,
+        this.espacoAtaque.posicao.y,
+        this.espacoAtaque.largura,
+        this.espacoAtaque.altura
+      )
+    }
   }
 
   atualizar() {
     this.renderizar()
+
+    this.espacoAtaque.posicao.x =
+      this.posicao.x + this.espacoAtaque.areaDeslocamentoBraco.x
+    this.espacoAtaque.posicao.y = this.posicao.y
 
     this.posicao.x += this.velocidade.x
     this.posicao.y += this.velocidade.y
@@ -38,6 +63,13 @@ class Combatente {
     } else {
       this.velocidade.y += gravidade
     }
+  }
+
+  atacar() {
+    this.estaAtacando = true
+    setTimeout(() => {
+      this.estaAtacando = false
+    }, 150)
   }
 
 }
@@ -54,6 +86,10 @@ const jogador = new Combatente({
     y: 0,
   },
   cor: "red",
+  areaDeslocamentoBraco: {
+    x: 0,
+    y: 0,
+  },
 })
 jogador.renderizar()
 
@@ -68,6 +104,10 @@ const oponente = new Combatente({
     y: 0,
   },
   cor: "blue",
+  areaDeslocamentoBraco: {
+    x: -60,
+    y: 0,
+  },
 })
 oponente.renderizar()
 
@@ -97,7 +137,11 @@ window.addEventListener("keydown", (event) => {
       jogador.velocidade.y = -28
       break
 
-    case "ArrowRight":
+    case " ":
+      jogador.atacar()
+      break
+
+      case "ArrowRight":
       teclas.ArrowRight.pressed = true
       oponente.ultimaTecla = "ArrowRight"
       break
@@ -109,6 +153,10 @@ window.addEventListener("keydown", (event) => {
 
     case "ArrowUp":
       oponente.velocidade.y = -28
+      break
+
+    case "0":
+      oponente.atacar()
       break
 
   }
@@ -149,7 +197,7 @@ function descrescerTemporizador() {
       jogador, 
       oponente, 
       id_temporizador 
-    });
+    })
   }
 }
 descrescerTemporizador()
@@ -157,11 +205,11 @@ descrescerTemporizador()
 // =======================================================
 
 function definirVencedor({ jogador, oponente, id_temporizador }) {
-  clearTimeout(id_temporizador);
-  document.querySelector("#mostrarTexto").style.display = "flex";
+  clearTimeout(id_temporizador)
+  document.querySelector("#mostrarTexto").style.display = "flex"
 
   if (jogador.vida === oponente.vida) {
-    document.querySelector("#mostrarTexto").innerHTML = "Empate";
+    document.querySelector("#mostrarTexto").innerHTML = "Empate"
   }
 }
 
